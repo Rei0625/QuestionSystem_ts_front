@@ -1,0 +1,46 @@
+<!-- 戻るボタン -->
+<div class="back-button" (click)="navigateToManageTop()">戻る</div>
+
+<!-- ユーザー作成ボタン -->
+<div class="create-button" (click)="navigateToManageUserCreate()">ユーザー作成</div>
+
+<div id="user-management-area">
+  <h2>ユーザー管理</h2>
+  <div class="user-list">
+    @for (user of users; track $index) {
+    <div class="user-row">
+      <div class="user-info">
+        <span class="user-name">{{ user.user_name }}</span>
+        <span class="user-email">{{ user.email }}</span>
+      </div>
+      <div>
+        @if (user.admin_id == 10 || user.admin_id == 0) {
+        <p>管理者</p>
+        }
+      </div>
+      <div>
+        <button class="reset-button" (click)="confirmReset(user)">リセット</button>
+        <button class="delete-button" (click)="confirmDelete(user)">削除</button>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+
+@if (showConfirmDialog) {
+<div class="modal-backdrop">
+  <div class="modal-content">
+    <p>「{{ selectedUser?.user_name }}」を削除しますか？</p>
+    <button (click)="deleteConfirmed()">はい</button>
+    <button (click)="cancelDelete()">いいえ</button>
+  </div>
+</div>
+} @if (showResetDialog) {
+<div class="modal-backdrop">
+  <div class="modal-content">
+    <p>「{{ selectedUser?.user_name }}」のパスワードをリセットしますか？</p>
+    <button (click)="ResetConfirmed()">はい</button>
+    <button (click)="cancelReset()">いいえ</button>
+  </div>
+</div>
+}

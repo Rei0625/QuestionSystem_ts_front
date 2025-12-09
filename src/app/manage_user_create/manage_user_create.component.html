@@ -1,0 +1,69 @@
+<!-- 戻るボタン -->
+<div class="back-button" (click)="navigateToManageUser()">戻る</div>
+
+<div id="admin-signup-area">
+  <h2>ユーザー作成（管理者用）</h2>
+  @if (errorMessage){
+    <p style="color: rgb(187, 7, 7);">{{ errorMessage }}</p>
+  }
+
+  <!-- ユーザー作成（個別） -->
+  <form class="form-section" name='create_user'(ngSubmit)="create_user()">
+    <label for="user-role">ユーザー種別</label>
+    <select id="user-role" name="user-role" required [(ngModel)]="admin">
+      <option value="">選択してください</option>
+      <option value="general">一般ユーザー</option>
+      <option value="admin">管理者</option>
+    </select>
+
+    <label for="username">ユーザー名</label>
+    <input type="text" id="username" name="username" placeholder="ユーザー名を入力" required [(ngModel)]="user_name" />
+
+    <label for="email">メールアドレス</label>
+    <input type="email" id="email" name="email" placeholder="メールアドレスを入力" required [(ngModel)]="email" />
+
+    <label for="password">パスワード</label>
+    <input type="password" id="password" name="password" placeholder="パスワードを入力" required [(ngModel)]="password" />
+
+    <label for="password-confirm">パスワード（確認用）</label>
+    <input type="password" id="password-confirm" name="password-confirm" placeholder="もう一度パスワードを入力" required [(ngModel)]="password_confirm" />
+
+    <button class="signup-button">アカウント作成</button>
+  </form>
+
+    <!-- 一括作成（CSV/Excel） -->
+    <div class="form-section">
+    <label>一括作成（CSV/Excel）</label>
+
+    <div
+        class="upload-area"
+        (click)="onUploadClick()"
+        (drop)="onFileDrop($event)"
+        (dragover)="$event.preventDefault()"
+    >
+        ここにファイルをドラッグ＆ドロップ または クリックしてアップロード
+        <input type="file" #fileInput (change)="onFileSelected($event)" hidden />
+    </div>
+    @if (uploaded_users; as users) {
+      <div class="preview-area">
+        <h4>読み込んだユーザー</h4>
+        <ul>
+          @for (user of users; track $index) {
+            <li>{{ user.user_name }}（{{ user.email }}）</li>
+          }
+        </ul>
+        <h4>結果</h4>
+            <ul>
+              @if (resultsMessage){
+                @for(result of resultsMessage; track $index){
+                  <li>{{result.user_name}} : {{result.message}}</li>
+                }
+              }               
+            </ul>
+        <button type="button" class="signup-button" (click)="bulkCreateUsers()">
+          一括作成
+        </button>
+      </div>
+    }
+    </div>
+</div>

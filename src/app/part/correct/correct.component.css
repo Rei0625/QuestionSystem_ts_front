@@ -1,0 +1,56 @@
+/* 🔴 画面全体に表示 */
+.correct-animation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* ⭕ 赤い丸アニメーション */
+.circle-animation {
+  width: 120px;
+  height: 120px;
+  transform: rotate(-90deg); /* 円の開始位置を12時方向に */
+}
+
+.circle {
+  fill: none;
+  stroke: red;
+  stroke-width: 10;
+  stroke-dasharray: 282.6; /* 2πr ≈ 2 * 3.14 * 45 */
+  stroke-dashoffset: 282.6;
+  animation: drawCircle 0.5s ease-out forwards; /* ← ここで速度調整 */
+}
+
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* 🎉 正解テキストアニメーション */
+.correct-text {
+  margin-top: 30px;
+  font-size: 32px;
+  font-weight: bold;
+  color: red;
+  opacity: 0;
+  animation: fadeInText 0.5s ease 0.5s forwards; /* 0.5s後に表示 */
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

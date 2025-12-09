@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ユーザー成績管理</title>
+  </head>
+  <body>
+    <div class="back-button" (click)="navigateToTop()">戻る</div>
+
+    <div id="admin">
+      <h2>ユーザー成績管理</h2>
+
+      <div class="user-info">
+        @if(userActive){
+        <div><strong>ユーザー名：</strong>{{ user_name }}</div>
+        @if(resultMessage){
+        <p style="color: #2ecc71">{{ resultMessage }}</p>
+        } @if(isActive){
+        <form>
+          <label for="now_password">現在のパスワード</label>
+          <input
+            type="password"
+            id="now_password"
+            name="now_password"
+            placeholder="ユーザー名を入力"
+            [(ngModel)]="now_password"
+            required
+          />
+
+          <label for="password">新しいパスワード</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="パスワードを入力"
+            [(ngModel)]="password"
+            required
+          />
+
+          <label for="password_confirm">新しいパスワード（確認用）</label>
+          <input
+            type="password"
+            id="password_confirm"
+            name="password_confirm"
+            placeholder="もう一度パスワードを入力"
+            [(ngModel)]="password_confirm"
+            required
+          />
+
+          @if(errorMessage){
+          <p style="color: red">{{ errorMessage }}</p>
+          }
+
+          <button type="submit" class="signup-button" (click)="changePassword()">
+            パスワード変更
+          </button>
+        </form>
+        }@else {
+        <button class="password-button" (click)="clickPasswordChange()">
+          パスワードを変更する
+        </button>
+        } }@else {
+        <button class="password-button" (click)="navigateToLogin()">ログイン</button>
+        }
+      </div>
+
+      <!-- 成績概要 -->
+      <div class="user-overview">
+        @for(group of score_collect | keyvalue; track $index){
+        <h3>{{ group.key }}</h3>
+
+        <div class="progress-container" aria-label="全体正答率">
+          <div class="progress-bar" [style.width.%]="examgroup_score[group.key]"></div>
+          <div class="progress-text">{{ this.examgroup_score[group.key] }}%</div>
+        </div>
+
+        <!-- 分野別 -->
+        <table class="rate-table" style="margin-bottom: 20px">
+          <thead>
+            <tr>
+              <th colspan="2">分野別正答率</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(category of group.value | keyvalue;track $index){
+            <tr>
+              <td style="width: 70%">{{ category.key }}</td>
+              <td style="width: 30%">
+                <div class="category-container small">
+                  <div
+                    class="category-bar"
+                    [style.width.%]="category_score[group.key][category.key]"
+                  ></div>
+                  <div class="category-text small">
+                    {{ category_score[group.key][category.key] }}%
+                  </div>
+                </div>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+        }
+      </div>
+    </div>
+  </body>
+</html>

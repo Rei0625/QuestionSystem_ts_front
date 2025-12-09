@@ -1,0 +1,60 @@
+.incorrect-animation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.cross-animation {
+  width: 120px;
+  height: 120px;
+}
+
+.cross-line {
+  stroke: #007bff; /* 青色 */
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-dasharray: 56.56; /* 線の長さ */
+  stroke-dashoffset: 56.56;
+  animation: drawLine 0.3s ease forwards;
+}
+
+.cross-line:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.cross-line:nth-child(2) {
+  animation-delay: 0.3s; /* 0.5秒ずらして次の線を描画 */
+}
+
+.incorrect-text {
+  margin-top: 30px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #007bff; /* 青色 */
+  opacity: 0;
+  animation: fadeInText 0.3s ease 0.5s forwards; /* 1秒遅らせて文字表示 */
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

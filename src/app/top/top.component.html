@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>資格演習室</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">資格演習室</div>
+
+      @if(login_id == ''){
+      <div class="auth">
+        <a (click)="navigateToLogin()">ログイン</a>
+        <a (click)="navigateToCreateUser()">ユーザー登録</a>
+      </div>
+      }@else {
+      <div class="aute">
+        <mat-icon
+          class="big-right-icon"
+          fontIcon="person"
+          style="margin-right: 10px"
+          (click)="navigateToScore()"
+        >
+        </mat-icon>
+        <mat-icon
+          class="big-right-icon"
+          fontIcon="logout"
+          style="margin-left: 20px"
+          (click)="confirmDelete()"
+        ></mat-icon>
+      </div>
+      }
+    </header>
+
+    <div class="content">
+      <div class="intro">
+        <p>出題形式を選んでください:</p>
+      </div>
+      <div class="links">
+        <button class="select-button" (click)="switchSection('exam')" [disabled]="isActive('exam')">
+          試験科目を指定して出題
+        </button>
+        <button
+          class="select-button"
+          (click)="switchSection('field')"
+          [disabled]="isActive('field')"
+        >
+          試験科目と分野を指定して出題
+        </button>
+        <button class="select-button" (click)="switchSection('mock')" [disabled]="isActive('mock')">
+          模擬試験形式で出題
+        </button>
+      </div>
+
+      <!-- 表示切り替え部分 -->
+      <div id="exam" class="section">
+        @if(isActive('exam')){
+        <h2>試験科目指定して出題</h2>
+        <p>該当する試験を選択してください:</p>
+        <p style="color: red">{{ errorMessage }}</p>
+
+        <form id="ExamgroupForm" class="checkbox-grid">
+          @for (examgroup of gernres; track $index) {
+          <label class="checkbox-box">
+            <input
+              type="checkbox"
+              name="gerner"
+              value="{{ examgroup.examgroup_id }}"
+              (change)="ExamgroupToggleSelect(examgroup.examgroup_id, $event)"
+            />
+            <span>{{ examgroup.examgroup_name }}</span>
+          </label>
+          }
+        </form>
+        }
+      </div>
+
+      <div id="field" class="section">
+        @if(isActive('field')){
+        <h2>試験科目と分野を指定して出題</h2>
+        <p>該当する試験科目と分野を選択してください</p>
+        <p style="color: red">{{ errorMessage }}</p>
+        <div class="container">
+          <div class="category-list">
+            @for(examgroup of gernres; track $index){ @if(examgroup.categorys?.length !== 0){
+            <div class="category">
+              <label class="parent">
+                <input
+                  type="checkbox"
+                  id="{{ examgroup.examgroup_id }}"
+                  (change)="checkGroup(examgroup.examgroup_id)"
+                />
+                <span>{{ examgroup.examgroup_name }}</span>
+              </label>
+              <ul class="children">
+                <form id="CategoryForm">
+                  @for (category of examgroup.categorys; track $index) {
+                  <li>
+                    <label
+                      ><input
+                        type="checkbox"
+                        class="data-{{ examgroup.examgroup_id }}"
+                        id="{{ category.category_id }}"
+                        name="{{ category.category_name }}"
+                        (change)="
+                          CategoryToggleSelect(
+                            category.category_id,
+                            category.category_examgroup_id,
+                            $event
+                          )
+                        "
+                      /><span>{{ category.category_name }}</span></label
+                    >
+                  </li>
+                  }
+                </form>
+              </ul>
+            </div>
+            }}
+          </div>
+        </div>
+        }
+      </div>
+
+      <div id="mock" class="section">
+        @if(isActive('mock')){
+        <h2>試験科目を指定して模擬試験開始</h2>
+        <p>該当する試験科目を選択してください:</p>
+        <p style="color: red">{{ errorMessage }}</p>
+        <form id="ExamForm" class="checkbox-grid">
+          @for(examgroup of gernres; track $index){
+          <label class="checkbox-box">
+            <input
+              type="radio"
+              name="year"
+              value="{{ examgroup.examgroup_id }}"
+              (change)="ExamSelect($event)"
+            />
+            <span>{{ examgroup.examgroup_name }}</span>
+          </label>
+          }
+        </form>
+        }
+      </div>
+
+      <div class="setting-box">
+        <h3>オプション項目</h3>
+        <form id="yearForm">
+          <label
+            ><input type="checkbox" name="setting" value="setting2" />
+            最初から解説文を表示する</label
+          ><br />
+        </form>
+      </div>
+
+      <div>
+        <button class="start-button" (click)="navigateToQuestion()">出題開始</button>
+      </div>
+    </div>
+
+    @if (showConfirmDialog) {
+    <div class="modal-backdrop">
+      <div class="modal-content">
+        <p>ログアウトしますか？</p>
+        <button (click)="deleteConfirmed()">はい</button>
+        <button (click)="cancelDelete()">いいえ</button>
+      </div>
+    </div>
+    }
+  </body>
+</html>

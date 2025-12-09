@@ -1,0 +1,265 @@
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* 戻るボタン（統一デザイン） */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #cccccc;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.back-button:hover {
+  background-color: #b0b0b0;
+}
+
+/* 編集ボタン */
+.edit-button {
+  background-color: #999;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.edit-button:hover {
+  background-color: #7a7a7a;
+  transform: translateY(-1px);
+}
+
+.edit-button:active {
+  transform: translateY(1px);
+}
+
+/* 削除ボタン */
+.delete-button {
+  background-color: #d9534f;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.delete-button:hover {
+  background-color: #c9302c;
+  transform: translateY(-1px);
+}
+
+.delete-button:active {
+  transform: translateY(1px);
+}
+
+/* セクション */
+#questionAdmin {
+  margin-top: 80px;
+  padding: 20px;
+}
+
+/* 横スクロール対応 */
+.table-wrapper {
+  overflow-x: auto;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+/* テーブルデザイン */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 900px; /* 横幅広げてスクロールを許可 */
+}
+
+thead {
+  background-color: #eaf2d3;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 10px 8px;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+/* 横幅調整 */
+th:nth-child(1),
+td:nth-child(1) {
+  /* 試験科目 */
+  width: 100px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  /* カテゴリー */
+  width: 120px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  /* 問題文 */
+  width: 250px;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  /* 回答形式/選択肢数 */
+  width: 120px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+  /* 選択肢 */
+  width: 250px;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+  /* 正解 */
+  width: 150px;
+  white-space: normal;
+}
+
+th:nth-child(7),
+td:nth-child(7) {
+  /* 解説 */
+  width: 200px;
+  white-space: normal;
+}
+
+th:nth-child(8),
+td:nth-child(8) {
+  /* 操作 */
+  width: 160px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* create-button */
+.create-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #6c8f00;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.create-button:hover {
+  background-color: #5a7800;
+}
+
+/* モーダルの背景（黒の半透明） */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* モーダルの中身 */
+.modal-content {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+}
+
+/* モーダル内のテキスト */
+.modal-content p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #3b5e00;
+  margin-bottom: 32px;
+}
+
+/* モーダル内の「はい」「いいえ」ボタン */
+.modal-content button {
+  background-color: #6c8f00;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.modal-content button:hover {
+  background-color: #557700;
+  transform: translateY(-2px);
+}
+
+.modal-content button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content button.cancel {
+  background-color: #cccccc;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.modal-content button.cancel:hover {
+  background-color: #b0b0b0;
+  transform: translateY(-2px);
+}
+
+.modal-content button.cancel:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}

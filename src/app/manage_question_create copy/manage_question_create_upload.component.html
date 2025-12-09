@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>一括作成画面</title>
+  </head>
+  <body>
+    <div class="back-button" (click)="navigateToQuestion()">戻る</div>
+    <div class="quiz-admin">
+      <h2>一括作成画面</h2>
+      <!-- ファイルアップロードエリア -->
+      <label
+        for="file_upload"
+        class="quiz-admin__upload-area"
+        (drop)="onDrop($event)"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+      >
+        ファイルを選択するか、ここにドラッグ＆ドロップしてください（CSVまたはExcel）
+        <input
+          type="file"
+          id="file_upload"
+          hidden
+          (change)="onFileSelected($event)"
+          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+        />
+      </label>
+
+      @if(questions.length>0){
+      <div class="quiz-admin__cards">
+        @for(question of questions; track $index){
+        <div class="quiz-admin__card">
+          <h3>
+            問題 {{ $index + 1 }}
+            <p style="color: red">{{ resultMessages[$index] }}</p>
+          </h3>
+
+          <div class="quiz-admin__form-group">
+            <label>カテゴリーID</label>
+            <input type="text" [(ngModel)]="question.question_category_id" />
+          </div>
+
+          <div class="quiz-admin__form-group">
+            <label>問題文</label>
+            <textarea [(ngModel)]="question.question_memo"></textarea>
+          </div>
+
+          <div class="quiz-admin__form-group">
+            <label>選択肢タイプ</label>
+            <select [(ngModel)]="question.option_type">
+              <option value="radiobutton">radiobutton</option>
+              <option value="checkbox">checkbox</option>
+            </select>
+          </div>
+
+          <div class="quiz-admin__form-group">
+            <label>選択肢（カンマ区切り）</label>
+            <textarea [(ngModel)]="question.question_option"></textarea>
+          </div>
+
+          <div class="quiz-admin__form-group">
+            <label>ラジオ正解(回答番号を選択)</label>
+            <input
+              type="number"
+              min="0"
+              [(ngModel)]="question.question_radio_answer"
+              [disabled]="question.option_type !== 'radiobutton'"
+            />
+          </div>
+
+          <div class="quiz-admin__form-group">
+            <label>チェックボックス正解（カンマ区切り）</label>
+            <textarea
+              [(ngModel)]="question.question_checkbox_answer"
+              [disabled]="question.option_type !== 'checkbox'"
+              placeholder="true,false,..."
+            ></textarea>
+          </div>
+
+          <div class="quiz-admin__form-group">
+            <label>解説</label>
+            <textarea [(ngModel)]="question.question_code"></textarea>
+          </div>
+        </div>
+        }
+      </div>
+      }
+
+      <button
+        class="quiz-admin__signup-button"
+        (click)="registerQuestions()"
+        [disabled]="questions.length === 0"
+      >
+        一括登録する
+      </button>
+    </div>
+  </body>
+</html>

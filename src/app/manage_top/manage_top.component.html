@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>管理画面トップ</title>
+</head>
+<body>
+
+  <!-- ログアウトボタン（見た目のみ） -->
+  <div class="logout-button" (click)="navigateToLogout()">ログアウト</div>
+
+  <div id="admin-top-area">
+    <h2>管理画面メニュー</h2>
+    <div class="admin-buttons">
+      <div class="admin-button" (click)="navigateToManageGernre()">分野管理</div>
+      <div class="admin-button" (click)="navigateToManageQuestion()">問題管理</div>
+      <div class="admin-button" (click)="navigateToManageUser()">ユーザー管理</div>
+      <div class="admin-button" (click)="navigateToManageMarks()">成績管理</div>
+    </div>
+  </div>
+
+</body>
+</html>

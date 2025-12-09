@@ -1,0 +1,150 @@
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #cccccc;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  user-select: none;
+  cursor: default; /* 画面設計のため非アクティブ */
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+}
+
+.back-button:hover {
+  background-color: #b0b0b0;
+}
+
+/* Quiz Admin コンテナ */
+.quiz-admin {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+  padding-top: 40px; /* 被り防止 */
+}
+
+/* 見出し */
+.quiz-admin h2 {
+  color: #3b5e00;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* アップロードエリア */
+.quiz-admin__upload-area {
+  border: 2px dashed #4a7c00;
+  padding: 28px;
+  text-align: center;
+  border-radius: 8px;
+  color: #4a7c00;
+  font-size: 16px;
+  margin: 40px auto 48px auto;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  max-width: 600px;
+  user-select: none;
+  display: block;
+}
+.quiz-admin__upload-area:hover {
+  background-color: #e6f0b8;
+}
+
+/* カード全体 */
+.quiz-admin__cards {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 各カード */
+.quiz-admin__card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.quiz-admin__card h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #4a7c00;
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+/* 各フォーム項目 */
+.quiz-admin__form-group {
+  margin-bottom: 14px;
+}
+.quiz-admin__form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+}
+.quiz-admin__form-group input[type='text'],
+.quiz-admin__form-group input[type='number'],
+.quiz-admin__form-group textarea,
+.quiz-admin__form-group select {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 2px solid #4a7c00;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.3s, background-color 0.3s;
+  resize: vertical;
+}
+.quiz-admin__form-group textarea {
+  min-height: 50px;
+}
+.quiz-admin__form-group input:disabled,
+.quiz-admin__form-group textarea:disabled,
+.quiz-admin__form-group select:disabled {
+  background-color: #f0f0f0;
+  color: #999;
+  cursor: not-allowed;
+}
+.quiz-admin__form-group input:focus,
+.quiz-admin__form-group textarea:focus,
+.quiz-admin__form-group select:focus {
+  border-color: #3e6500;
+  outline: none;
+  background-color: #f0f6d8;
+}
+
+/* 登録ボタン */
+.quiz-admin__signup-button {
+  background-color: #4a7c00;
+  width: 200px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+  margin: 24px auto 0 auto;
+  display: block;
+}
+.quiz-admin__signup-button:hover:not(:disabled) {
+  background-color: #3e6500;
+  transform: translateY(-2px);
+}
+.quiz-admin__signup-button:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+.quiz-admin__signup-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}

@@ -1,0 +1,63 @@
+<div class="back-button" (click)="navigateToManageTop()">戻る</div>
+<div class="create-button" (click)="navigateToManageGernreCreate()">分野作成</div>
+<div id="container">
+  <h2>分野管理画面</h2>
+
+  <div class="tree-node">
+    @if (errorMessage){
+    <p style="color: red">{{ errorMessage }}</p>
+    } @if (resultMessage){
+    <p style="color: red">{{ resultMessage }}</p>
+    } @for (gernre of gernres; track $index){
+    <div class="node-header">
+      <span class="toggle" (click)="toggleNode(gernre.examgroup_id)">▶</span>
+      <span class="node-name">{{ gernre.examgroup_name }}</span>
+      <span class="actions">
+        <button class="action-btn edit-btn" (click)="EditExamgroup(gernre)">編集</button>
+        <button class="action-btn delete-btn" (click)="confirmExamgroupDelete(gernre)">削除</button>
+      </span>
+    </div>
+    @for(category of gernre.categorys; track $index){
+    <div
+      class="children"
+      [id]="category.category_examgroup_id"
+      [hidden]="!openedNodes.has(toNumber(category.category_examgroup_id))"
+    >
+      <div class="tree-node">
+        <div class="node-header">
+          <span class="node-name">{{ category.category_name }} ID:{{ category.category_id }}</span>
+          <span class="actions">
+            <button
+              class="action-btn edit-btn"
+              (click)="EditCategory(gernre, category.category_id)"
+            >
+              編集
+            </button>
+            <button class="action-btn delete-btn" (click)="confirmCategoryDelete(category)">
+              削除
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    } }
+  </div>
+
+  @if (showConfirmExamgroupDialog) {
+  <div class="modal-backdrop">
+    <div class="modal-content">
+      <p>「{{ selected_examgroup?.examgroup_name }}」を削除しますか？</p>
+      <button (click)="deleteExamgroupConfirmed()">はい</button>
+      <button (click)="cancelExamgroupDelete()">いいえ</button>
+    </div>
+  </div>
+  } @if (showConfirmCategoryDialog) {
+  <div class="modal-backdrop">
+    <div class="modal-content">
+      <p>「{{ selected_category?.category_name }}」を削除しますか？</p>
+      <button (click)="deleteCategoryConfirmed()">はい</button>
+      <button (click)="cancelCategoryDelete()">いいえ</button>
+    </div>
+  </div>
+  }
+</div>

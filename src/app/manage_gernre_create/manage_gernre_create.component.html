@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>分野作成画面</title>
+  </head>
+  <body>
+    <div class="back-button" (click)="navigateToGernre()">戻る</div>
+
+    @if(isActive == 'false'){
+    <div id="container">
+      <h2>分野作成</h2>
+
+      <form id="large-exam-form" (ngSubmit)="create_examgroup()">
+        @if(errorExamgroupMessage){
+        <label for="large-exam-name" style="color: red">{{ errorExamgroupMessage }}</label>
+        } @if(createExamMessage){
+        <label for="large-exam-name" style="color: red">{{ createExamMessage }}</label>
+        }
+        <label for="large-exam-name">試験科目</label>
+        <input
+          type="text"
+          name="large-exam-name"
+          id="large-exam-name"
+          placeholder="例:基本情報技術者試験"
+          [(ngModel)]="examgroup_name"
+          required
+        />
+        <button type="submit">試験科目作成</button>
+      </form>
+
+      <form id="medium-category-form" (ngSubmit)="create_category()">
+        @if(errorCategoryMessage){
+        <label for="large-exam-name" style="color: red">{{ errorCategoryMessage }}</label>
+        } @if(createCategoryMessage){
+        <label for="large-exam-name" style="color: red">{{ createCategoryMessage }}</label>
+        }
+        <label for="parent-large-category">所属試験科目</label>
+        <select
+          id="parent-large-category"
+          name="parent-large-category"
+          [(ngModel)]="category_examgroup_id"
+          required
+        >
+          <option value="" disabled selected>選択してください</option>
+          @for(exam of examgroups; track $index){
+          <option [value]="exam.examgroup_id">{{ exam.examgroup_name }}</option>
+          }
+        </select>
+
+        <label for="medium-category-name">カテゴリー</label>
+        <input
+          type="text"
+          name="large-category-name"
+          id="medium-category-name"
+          placeholder="例: IT技術"
+          [(ngModel)]="category_name"
+          required
+        />
+        <button type="submit">カテゴリー作成</button>
+      </form>
+    </div>
+    } @else if(isActive == 'examgroup') {
+    <div id="container">
+      <h2>試験科目編集</h2>
+
+      <form id="large-exam-form" (ngSubmit)="editExamgroup()">
+        @if(errorExamgroupMessage){
+        <label for="large-exam-name" style="color: red">{{ errorExamgroupMessage }}</label>
+        } @if(createExamMessage){
+        <label for="large-exam-name" style="color: red">{{ createExamMessage }}</label>
+        }
+        <label for="large-exam-name">試験科目</label>
+        <input
+          type="text"
+          name="large-exam-name"
+          id="large-exam-name"
+          placeholder="例:基本情報技術者試験"
+          [(ngModel)]="examgroup_name"
+          required
+        />
+        <button type="submit" (click)="editExamgroup()">試験科目編集</button>
+      </form>
+    </div>
+    }@else if(isActive == 'category'){
+    <div id="container">
+      <h2>カテゴリー編集</h2>
+
+      <form id="medium-category-form" (ngSubmit)="editCategory()">
+        @if(errorCategoryMessage){
+        <label for="large-exam-name" style="color: red">{{ errorCategoryMessage }}</label>
+        } @if(createCategoryMessage){
+        <label for="large-exam-name" style="color: red">{{ createCategoryMessage }}</label>
+        }
+        <label for="parent-large-category">所属試験科目</label>
+        <select
+          id="parent-large-category"
+          name="parent-large-category"
+          [(ngModel)]="category_examgroup_id"
+          required
+        >
+          <option value="" disabled selected>選択してください</option>
+          @for(exam of examgroups; track $index){
+          <option [value]="exam.examgroup_id">{{ exam.examgroup_name }}</option>
+          }
+        </select>
+
+        <label for="medium-category-name">カテゴリー</label>
+        <input
+          type="text"
+          name="large-category-name"
+          id="medium-category-name"
+          placeholder="例: IT技術"
+          [(ngModel)]="category_name"
+          required
+        />
+        <button type="submit">カテゴリー編集</button>
+      </form>
+    </div>
+    }
+  </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>過去問道場 問題表示部分</title>
+  </head>
+  <body>
+    @if(isLoading == true){
+    <app-loading></app-loading>
+    } @else{
+    <div class="back-button" (click)="navigateToTop()">戻る</div>
+
+    <div id="question-area">
+      <div class="top-buttons">
+        <button class="detail-button" (click)="navigateToScore()">成績詳細</button>
+      </div>
+      <div class="question-number">第{{ count }}問</div>
+      <div class="question-text" class="pre-text">{{ question_data?.question_memo }}</div>
+
+      @if(active == 'radiobutton'){
+      <div class="radiochoices">
+        @for(question_option of question_data?.question_option; track $index){
+        <label>
+          <input
+            type="radio"
+            name="{{ question_data?.question_id }}"
+            value="{{ question_option }}"
+            [(ngModel)]="user_radio_answer"
+          />
+          <div class="choice-btn">{{ $index + 1 }}</div>
+          <span>{{ question_option }}</span>
+        </label>
+        }
+      </div>
+      } @else if (active == 'checkbox') {
+
+      <div class="checkchoices">
+        @for(question_option of question_data?.question_option; track $index){
+        <label>
+          <input
+            type="checkbox"
+            [value]="question_option"
+            [checked]="user_check_answer.includes(question_option)"
+            (change)="onCheckboxChange($event, question_option)"
+          />
+          <div class="choice-btn">{{ $index + 1 }}</div>
+          <span>{{ question_option }}</span>
+        </label>
+        }
+      </div>
+      } @if(code_active == false){
+      <div style="text-align: center; margin-top: 30px">
+        <button class="next-button" (click)="Answer()">回答</button>
+      </div>
+      } @if(result ==true){
+      <app-correct></app-correct>
+      } @else if(result == false){
+      <app-incorrect></app-incorrect>
+      }
+      <div>
+        <h3>◇分類</h3>
+        <p>
+          {{ question_data?.question_examgroup_name }} ⇒
+          {{ question_data?.question_category_name }}
+        </p>
+      </div>
+
+      <div>
+        <h3>◇正解</h3>
+        @if(code_active == false){
+        <button id="show-answer-btn" class="answer-button" (click)="displayCode()">正解表示</button>
+        } @if(code_active == true){
+        <div id="answer-section">
+          @if(question_data?.option_type == 'radiobutton'){
+          <div id="answer-display">
+            <p>{{ radio_answer }}</p>
+          </div>
+          } @else if(question_data?.option_type == 'checkbox'){
+          <div id="answer-display">
+            @for(check of check_answer; track $index){
+            <p>{{ check }}</p>
+            }
+          </div>
+          }
+
+          <h3>◇あなたの回答</h3>
+          <div id="explanations">
+            @for(user of user_result; track $index){
+            <p>{{ user }}</p>
+            }
+          </div>
+
+          <h3>◇解説</h3>
+          <div id="explanation">
+            <p class="pre-text">{{ question_data?.question_code }}</p>
+          </div>
+        </div>
+        }
+      </div>
+
+      <div style="text-align: center; margin-top: 30px">
+        <button class="next-button" (click)="nextQuestion()">次の問題</button>
+      </div>
+    </div>
+    }
+  </body>
+</html>

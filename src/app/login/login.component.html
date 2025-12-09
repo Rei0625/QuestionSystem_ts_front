@@ -1,0 +1,36 @@
+<div class="back-button" (click)="navigateToTop()">戻る</div>
+
+<div id="login-area">
+  <h2>ログイン</h2>
+  @if (errorMessage){
+  <p style="color: red">{{ errorMessage }}</p>
+  }
+  <form (ngSubmit)="login()">
+    <label for="username">ユーザー名</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      placeholder="ユーザー名を入力"
+      [(ngModel)]="user_name"
+      required
+    />
+
+    <label for="password">パスワード</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      placeholder="パスワードを入力"
+      [(ngModel)]="password"
+      required
+    />
+
+    <button type="submit" class="login-button">ログイン</button>
+  </form>
+
+  <p>
+    アカウント作成しませんか？
+    <button class="create-button" (click)="navigateToCreateUser()">アカウント作成</button>
+  </p>
+</div>

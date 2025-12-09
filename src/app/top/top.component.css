@@ -1,0 +1,337 @@
+header {
+  background-color: #ffffff;
+  padding: 20px 40px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3b5e00;
+}
+
+header .auth {
+  font-size: 14px;
+  color: #6c8f00;
+}
+
+header .aute {
+  font-size: 14px;
+  color: #6c8f00;
+}
+
+header .auth a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: #6c8f00;
+}
+
+header .auth a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 30px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.intro {
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.links a {
+  flex: 1;
+  text-align: center;
+  font-size: 16px;
+  color: #6c8f00;
+  text-decoration: none;
+  padding: 10px 15px;
+  border: 1px solid #6c8f00;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.links a:hover {
+  background-color: #eaf2d3;
+}
+.start-button {
+  background-color: #6c8f00;
+  margin-left: auto;
+  margin-right: auto;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.start-button:hover {
+  background-color: #5a7800;
+  transform: translateY(-2px);
+}
+
+.start-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* チェックボックスのグリッド配置 */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4列固定 */
+  gap: 12px;
+}
+
+/* チェックボックス+ラベルのボックス */
+.checkbox-box {
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  border: 2px solid #6c8f00;
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
+  user-select: none;
+  background-color: #fafafa;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* チェックボックス自体のスタイル */
+.checkbox-box input[type='checkbox'] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* チェックが入っている時のスタイル */
+.checkbox-box input[type='checkbox']:checked + span {
+  font-weight: bold;
+  color: #3b5e00;
+}
+
+/* チェックボックスのラベルをホバーした時 */
+.checkbox-box:hover {
+  background-color: #eaf2d3;
+  border-color: #557700;
+}
+
+/* オプション項目のボックス */
+.setting-box {
+  display: flex;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  align-items: center;
+  border: 2px solid #6c8f00;
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
+  user-select: none;
+  background-color: #fafafa;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* 親＋子カテゴリリスト全体 */
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 30px;
+}
+
+/* 1カテゴリごとのボックス */
+.category-list .category {
+  flex: 1 1 280px;
+  background: #ffffff;
+  border: 2px solid #6c8f00;
+  border-radius: 8px;
+  padding: 15px 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* 親ラベル */
+.category-list .parent {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #3b5e00;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.category-list .parent input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+/* 子リスト */
+.category-list .children {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.category-list .children li {
+  padding: 6px 0;
+  border-bottom: 1px dashed #ddd;
+}
+
+.category-list .children li:last-child {
+  border-bottom: none;
+}
+
+.category-list .children label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  gap: 8px;
+}
+
+.category-list .children input[type='checkbox'] {
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* 子ラベルホバー時 */
+.category-list .children label:hover {
+  background-color: #eaf2d3;
+}
+
+/* チェックが入っている時のテキスト */
+.category-list .children input[type='checkbox']:checked + span {
+  font-weight: bold;
+  color: #3b5e00;
+}
+
+.big-right-icon {
+  font-size: 170%; /* 大きさ */
+  text-align: right; /* 右寄せ */
+  color: #6c8f00; /* 通常色（任意） */
+  cursor: pointer; /* ポインターにする */
+  transition: color 0.3s, transform 0.2s; /* アニメーション */
+}
+
+.big-right-icon:hover {
+  color: #3b5e00; /* ホバー時の強調色 */
+  transform: scale(1.2); /* 少し大きくして強調 */
+}
+
+/* モーダルの背景（黒の半透明） */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* モーダルの中身 */
+.modal-content {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+}
+
+/* モーダル内のテキスト */
+.modal-content p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #3b5e00;
+  margin-bottom: 32px;
+}
+
+/* モーダル内の「はい」「いいえ」ボタン */
+.modal-content button {
+  background-color: #6c8f00;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.modal-content button:hover {
+  background-color: #557700;
+  transform: translateY(-2px);
+}
+
+.modal-content button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content button.cancel {
+  background-color: #cccccc;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.modal-content button.cancel:hover {
+  background-color: #b0b0b0;
+  transform: translateY(-2px);
+}
+
+.modal-content button.cancel:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.select-button {
+  flex: 1;
+  text-align: center;
+  font-size: 16px;
+  color: #6c8f00;
+  text-decoration: none;
+  padding: 10px 15px;
+  border: 2px solid #6c8f00;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.select-button:hover {
+  background-color: #eaf2d3;
+}

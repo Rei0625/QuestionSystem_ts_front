@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ユーザー成績管理画面 - 分野・中分類別</title>
+  </head>
+  <body>
+    <!-- 戻るボタン -->
+    <div class="back-button" onclick="history.back()">戻る</div>
+
+    <div id="admin" class="section">
+      <h2>ユーザー成績管理</h2>
+
+      <div style="margin-bottom: 20px">
+        <label for="userSelect"><strong>ユーザーを選択:</strong></label>
+        <select id="userSelect" [(ngModel)]="user_id" (change)="getScore($event)">
+          <option selected disabled>-- ユーザーを選択 --</option>
+          @for(user of users; track $index){
+          <option value="{{ user.user_id }}">{{ user.user_name }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- 成績概要 -->
+      <div class="user-overview">
+        @for(group of score_collect | keyvalue; track $index){
+        <h3>{{ group.key }}</h3>
+
+        <div class="progress-container" aria-label="全体正答率">
+          <div class="progress-text" style="margin-bottom: 10px">
+            {{ examgroup_score[group.key] }}%
+          </div>
+        </div>
+
+        <!-- 分野別 -->
+        <table class="rate-table" style="margin-bottom: 20px">
+          <thead>
+            <tr>
+              <th colspan="2">分野別正答率</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(category of group.value| keyvalue;track $index){
+            <tr>
+              <td style="width: 70%">{{ category.key }}</td>
+              <td style="width: 30%">
+                <div class="category-container small">
+                  <div class="category-text small">
+                    {{ category_score[group.key][category.key] }}%
+                  </div>
+                </div>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+        }
+      </div>
+    </div>
+  </body>
+</html>

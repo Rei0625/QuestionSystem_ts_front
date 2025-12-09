@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>問題管理画面</title>
+  </head>
+  <body>
+    <!-- 戻るボタン -->
+    <div class="back-button" (click)="navigateToManageTop()">戻る</div>
+    <div class="create-button" (click)="navigateToQuestion()">問題作成</div>
+
+    <!-- 問題管理画面 -->
+    <div id="questionAdmin" class="section">
+      <h2>問題管理</h2>
+      <p style="color: red">{{ resultMessage }}</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>試験科目</th>
+              <th>カテゴリー</th>
+              <th>問題文</th>
+              <th>回答形式/選択肢数</th>
+              <th>選択肢</th>
+              <th>正解</th>
+              <th>解説</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(examgroup of gernres; track $index){ @for(category of examgroup.categorys; track
+            $index){ @for(question of category.questions; track $index){
+            <tr>
+              <td>{{ examgroup.examgroup_name }}</td>
+              <td>{{ category.category_name }}</td>
+              <td>{{ question.question_memo }}</td>
+              <td>
+                {{ question.option_type }} / {{ JSON.parse(question.question_option).length }}
+              </td>
+              <td>
+                @for (question_op of JSON.parse(question.question_option); track $index) {
+                {{ $index + 1 }}. {{ question_op }} <br />}
+              </td>
+              @if( question.option_type == 'radiobutton'){
+              <td>{{ question.question_radio_answer }}</td>
+              } @else {
+              <td>
+                @if(question.question_checkbox_answer){@for(checkanswer of
+                JSON.parse(question.question_checkbox_answer); track $index){ {{ $index + 1 }}.
+                @if(checkanswer == true){ 正解 } @else { 不正解 }
+                <br />
+                }}
+              </td>
+              }
+              <td>{{ question.question_code }}</td>
+              <td>
+                <button class="edit-button" (click)="editQuestion(question)">編集</button>
+                <button class="delete-button" (click)="confirmDelete(question.question_id)">
+                  削除
+                </button>
+              </td>
+            </tr>
+            } } }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    @if (showConfirmDialog) {
+    <div class="modal-backdrop">
+      <div class="modal-content">
+        <p>削除しますか？</p>
+        <button (click)="deleteConfirmed()">はい</button>
+        <button (click)="cancelDelete()">いいえ</button>
+      </div>
+    </div>
+    }
+  </body>
+</html>

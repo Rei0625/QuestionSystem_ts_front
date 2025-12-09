@@ -1,0 +1,246 @@
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #cccccc;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+}
+
+.back-button:hover {
+  background-color: #b0b0b0;
+}
+
+.answer-button {
+  background-color: #cccccc;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  border: none;
+  margin-top: 10px;
+}
+
+.answer-button:hover {
+  background-color: #b0b0b0;
+}
+
+#question-area {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 30px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  position: relative;
+}
+
+.top-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.detail-button {
+  background-color: #6c8f00;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.detail-button:hover {
+  background-color: #557700;
+  transform: translateY(-1px);
+}
+
+.detail-button:active {
+  transform: translateY(1px);
+}
+
+.question-number {
+  font-size: 20px;
+  font-weight: bold;
+  color: #3b5e00;
+  margin-bottom: 16px;
+}
+
+.question-text {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* --- ラジオボタン用 --- */
+.radiochoices {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.radiochoices input[type='radio'] {
+  display: none;
+}
+
+.radiochoices label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.radiochoices label:hover .choice-btn {
+  background-color: #eaf2d3;
+  border-color: #557700;
+}
+
+.radiochoices input[type='radio']:checked + .choice-btn {
+  background-color: #6c8f00;
+  color: #fff;
+  border-color: #557700;
+}
+
+.radiochoices input[type='radio']:checked + .choice-btn + span {
+  font-weight: bold;
+  color: #3b5e00;
+}
+
+/* --- チェックボックス用 --- */
+.checkchoices {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkchoices input[type='checkbox'] {
+  display: none;
+}
+
+.checkchoices label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.checkchoices label:hover .choice-btn {
+  background-color: #eaf2d3;
+  border-color: #557700;
+}
+
+.checkchoices input[type='checkbox']:checked + .choice-btn {
+  background-color: #6c8f00;
+  color: #fff;
+  border-color: #557700;
+}
+
+.checkchoices input[type='checkbox']:checked + .choice-btn + span {
+  font-weight: bold;
+  color: #3b5e00;
+}
+
+/* --- 共通の選択肢ボタンスタイル --- */
+.choice-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  margin-right: 14px;
+  border-radius: 6px;
+  border: 2px solid #6c8f00;
+  background-color: #fff;
+  color: #6c8f00;
+  font-weight: bold;
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.next-button {
+  background-color: #6c8f00;
+  margin-left: auto;
+  margin-right: auto;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.next-button:hover {
+  background-color: #5a7800;
+  transform: translateY(-2px);
+}
+
+.next-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+#answer-section {
+  margin-top: 10px;
+}
+
+#answer-display {
+  background-color: #f0f9e8;
+  padding: 16px;
+  border-left: 4px solid #6c8f00;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+#explanation {
+  background-color: #eef5ff;
+  padding: 16px;
+  border-left: 4px solid #337ab7;
+  border-radius: 4px;
+}
+
+#explanations {
+  background-color: #feeeff;
+  padding: 16px;
+  border-left: 4px solid #aa5088;
+  border-radius: 4px;
+}
+
+.pre-text {
+  white-space: pre-line;
+}

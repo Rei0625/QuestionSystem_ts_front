@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>問題作成画面（画面設計）</title>
+  </head>
+  <body>
+    <div class="back-button" (click)="navigateToQuestion()">戻る</div>
+    <div class="create-button" (click)="navigateToQuestionsCreate()">問題一括作成</div>
+
+    <div id="questionCreate" class="section">
+      <h2>問題作成</h2>
+
+      <form>
+        <!-- 分類選択 -->
+        <div class="form-group">
+          <label>分類</label>
+          <div class="select-group">
+            <select
+              id="select-examgroup"
+              name="select-examgroup"
+              [(ngModel)]="select_gernre"
+              (ngModelChange)="selectToExamgroup($event)"
+            >
+              <option [ngValue]=""></option>
+              @for(gernre of gernres; track $index){
+              <option [ngValue]="gernre">{{ gernre.examgroup_name }}</option>
+              }
+            </select>
+
+            <select id="select-category" name="select-category" [(ngModel)]="select_category">
+              <option [ngValue]=""></option>
+              @if(select_gernre){ @for (category of select_gernre.categorys; track $index) {
+              <option [ngValue]="category">{{ category.category_name }}</option>
+              } }
+            </select>
+          </div>
+        </div>
+
+        <!-- 問題文 -->
+        <div class="form-group">
+          <label>問題文</label>
+          <textarea
+            rows="4"
+            placeholder="例）TCPとUDPの違いは？"
+            id="question-text"
+            name="question-text"
+            [(ngModel)]="question_text"
+          ></textarea>
+        </div>
+
+        <!-- 選択肢の形式 -->
+        <div class="form-group">
+          <label>選択肢の形式</label>
+          <select
+            id="select-option-type"
+            name="select-option-type"
+            [(ngModel)]="option_type"
+            (ngModelChange)="selectToOption_type($event)"
+          >
+            <option value="radiobutton">🔘 ラジオボタン</option>
+            <option value="checkbox">⬜️ チェックボックス</option>
+          </select>
+        </div>
+
+        <!-- 選択肢数 -->
+        <div class="form-group">
+          <label>選択肢数</label>
+          <select
+            id="select-option-count"
+            name="select-option-count"
+            [(ngModel)]="count"
+            (ngModelChange)="selectToOption_count($event)"
+          >
+            @for(i of numbers; track $index){
+            <option [value]="i">{{ i }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- 選択肢 -->
+        <div class="form-group">
+          <label>選択肢</label>
+          <div class="choice-group">
+            @if(option_type == 'radiobutton'){ @if(counts){ @for(count of counts; track count){
+            <div class="choice-wrapper">
+              <input
+                type="radio"
+                name="correctAnswer"
+                [(ngModel)]="radio_answer_index"
+                [value]="count"
+              />
+              <input
+                type="text"
+                name="question-option-{{ count }}"
+                [(ngModel)]="question_option[count - 1]"
+                placeholder="選択肢 {{ count }}"
+              />
+            </div>
+            } }
+            <p class="note">※ 正解となる選択肢にチェックを入れてください。</p>
+            }
+          </div>
+
+          <div class="choice-group">
+            @if(option_type == 'checkbox'){ @if(counts){ @for(count of counts; track $index){
+            <div class="choice-wrapper">
+              <input
+                type="checkbox"
+                name="correctAnswer-{{ count - 1 }}"
+                [(ngModel)]="checkbox_answer[count - 1]"
+                [value]="count - 1"
+              />
+              <input
+                type="text"
+                name="question-option-{{ count - 1 }}"
+                [(ngModel)]="question_option[count - 1]"
+                placeholder="選択肢 {{ count }}"
+              />
+            </div>
+            } }
+            <p class="note">※ 正解となる選択肢にチェックを入れてください。</p>
+            }
+          </div>
+        </div>
+
+        <!-- 解説 -->
+        <div class="form-group">
+          <label>解説</label>
+          <textarea
+            rows="3"
+            placeholder="例）TCPはコネクションを確立してから通信しますが、UDPはそのままデータを送ります。"
+            id="answer-explanation"
+            name="answer-explanation"
+            [(ngModel)]="question_code"
+          ></textarea>
+        </div>
+
+        <!-- 作成ボタン -->
+        <div class="form-submit">
+          @if(errorMessage){
+          <label style="color: red">{{ errorMessage }}</label>
+          } @if(createMessage){
+          <label style="color: green">{{ createMessage }}</label>
+          } @if(editActive == true){
+          <button type="submit" class="submit-button" (click)="EditQuestion()">更新</button> }
+          @else{
+          <button type="submit" class="submit-button" (click)="createQuestion()">作成</button>
+          }
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,212 @@
+#container {
+  max-width: 900px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #3b5e00;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* ツリーのノード */
+.tree-node {
+  margin-left: 12px;
+  user-select: none;
+}
+
+/* ノード全体の横並び＋囲み */
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 12px;
+  border: 1.5px solid #a2bb46;
+  border-radius: 8px;
+  background-color: #f4f9dc;
+  user-select: none;
+}
+
+/* トグルボタン */
+.toggle {
+  cursor: pointer;
+  user-select: none;
+  display: inline-block;
+  width: 24px;
+  font-size: 14px;
+  color: #7a9632;
+  flex-shrink: 0;
+}
+
+.toggle:hover {
+  color: #a2bb46;
+}
+
+.toggle-placeholder {
+  display: inline-block;
+  width: 24px;
+}
+
+/* ノード名 */
+.node-name {
+  flex-grow: 1;
+  font-weight: 600;
+  font-size: 16px;
+  color: #3b5e00;
+}
+
+/* アクションボタンの親 */
+.actions {
+  display: inline-flex;
+  gap: 8px;
+}
+
+/* アクションボタン共通 */
+button.action-btn {
+  background-color: #a2bb46;
+  border: none;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+/* 編集ボタン */
+button.action-btn.edit-btn:hover {
+  background-color: #7a9632;
+}
+
+/* 削除ボタン */
+button.action-btn.delete-btn {
+  background-color: #d9534f;
+}
+
+button.action-btn.delete-btn:hover {
+  background-color: #b23227;
+}
+
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #cccccc;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.back-button:hover {
+  background-color: #b0b0b0;
+}
+
+.create-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #6c8f00;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  user-select: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.create-button:hover {
+  background-color: #5a7800;
+}
+
+/* モーダルの背景（黒の半透明） */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* モーダルの中身 */
+.modal-content {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+}
+
+/* モーダル内のテキスト */
+.modal-content p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #3b5e00;
+  margin-bottom: 32px;
+}
+
+/* モーダル内の「はい」「いいえ」ボタン */
+.modal-content button {
+  background-color: #6c8f00;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.modal-content button:hover {
+  background-color: #557700;
+  transform: translateY(-2px);
+}
+
+.modal-content button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content button.cancel {
+  background-color: #cccccc;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.modal-content button.cancel:hover {
+  background-color: #b0b0b0;
+  transform: translateY(-2px);
+}
+
+.modal-content button.cancel:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
