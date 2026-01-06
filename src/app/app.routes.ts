@@ -16,6 +16,7 @@ import { QuestionCompleteComponent } from './question_complete/question_complete
 import { ScoreComponent } from './score.component.ts/score.component';
 import { ManageMarks } from './manage_marks/manage_marks.component';
 import { AuthGuard } from './auth_guard/auth_guard';
+import { ScoreManageComponent } from './score.manage.component.ts/score.manage.component';
 
 export const routes: Routes = [
   { path: '', component: TopComponent },
@@ -26,6 +27,7 @@ export const routes: Routes = [
   { path: 'score', component: ScoreComponent },
 
   { path: 'manage', component: ManageTopComponent, canActivate: [AuthGuard] },
+  { path: 'manage/manage_score', component: ScoreManageComponent, canActivate: [AuthGuard] },
   { path: 'manage/user', component: ManageUserComponent, canActivate: [AuthGuard] },
   { path: 'manage/user/create', component: ManageUserCreateComponent, canActivate: [AuthGuard] },
   { path: 'manage/gernre', component: ManageGernreComponent, canActivate: [AuthGuard] },

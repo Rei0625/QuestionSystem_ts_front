@@ -41,8 +41,6 @@ export class loginComponent {
 
       this.back_adress = environment.apiUrl + 'user/login';
 
-      console.log(this.back_adress);
-
       this.http.post<LoginResponse>(this.back_adress, body, { withCredentials: true }).subscribe({
         next: (res) => {
           const loginResponse = new LoginResponse(res);

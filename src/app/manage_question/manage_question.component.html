@@ -15,6 +15,58 @@
       <h2>問題管理</h2>
       <p style="color: red">{{ resultMessage }}</p>
 
+      <div class="form-group filter-search-container">
+        <!-- セレクトボックス -->
+        <div class="select-group">
+          <!-- 試験項目 -->
+          <select
+            id="select-examgroup"
+            name="select-examgroup"
+            [(ngModel)]="select_gernre"
+            (ngModelChange)="selectToExamgroup($event)"
+          >
+            <option [ngValue]="null" disabled selected>試験項目を選択</option>
+            @for (gernre of gernres; track $index) {
+            <option [ngValue]="gernre">
+              {{ gernre.examgroup_name }}
+            </option>
+            }
+          </select>
+
+          <!-- カテゴリー -->
+          <select
+            id="select-category"
+            name="select-category"
+            [(ngModel)]="select_category"
+            [disabled]="!select_gernre"
+          >
+            <option [ngValue]="null" disabled selected>カテゴリーを選択</option>
+            @if (select_gernre) { @for (category of select_gernre.categorys; track $index) {
+            <option [ngValue]="category">
+              {{ category.category_name }}
+            </option>
+            } }
+          </select>
+        </div>
+
+        <!-- 検索ボックス
+        <div class="search-box">
+          <input
+            type="text"
+            id="question-text"
+            name="question-text"
+            placeholder="問題文で検索"
+            [(ngModel)]="serch_text"
+          />
+        </div> -->
+
+        <!-- ボタン -->
+        <div class="filter-reset-group">
+          <button class="filter-button" (click)="filterQuestions()">絞り込み</button>
+          <button class="reset-button" (click)="resetFilter()">リセット</button>
+        </div>
+      </div>
+
       <div class="table-wrapper">
         <table>
           <thead>
@@ -30,8 +82,8 @@
             </tr>
           </thead>
           <tbody>
-            @for(examgroup of gernres; track $index){ @for(category of examgroup.categorys; track
-            $index){ @for(question of category.questions; track $index){
+            @for(examgroup of selected_gernre; track $index){ @for(category of examgroup.categorys;
+            track $index){ @for(question of category.questions; track $index){
             <tr>
               <td>{{ examgroup.examgroup_name }}</td>
               <td>{{ category.category_name }}</td>

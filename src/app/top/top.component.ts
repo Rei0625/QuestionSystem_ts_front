@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { MatIconModule } from '@angular/material/icon';
 import { cookieService } from '../service/cookieService';
 import { questionDataService } from '../service/questionDataService';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-Top',
@@ -33,7 +34,8 @@ export class TopComponent {
     private router: Router,
     private http: HttpClient,
     private cookie: cookieService,
-    private questdata: questionDataService
+    private questdata: questionDataService,
+    private authService: AuthService
   ) {
     this.getGernres();
     this.cookieLoginGet();
@@ -73,6 +75,19 @@ export class TopComponent {
 
   navigateToScore() {
     this.router.navigate(['/score']);
+    this.authService.verifyToken().subscribe({
+      next: (res) => {
+        if (res == false) {
+          this.router.navigate(['/score']);
+        } else if (res == true) {
+          this.router.navigate(['/manage/manage_score']);
+        }
+      },
+      error: (err) => {
+        console.error('Token verification failed', err);
+        this.router.navigate(['/']);
+      },
+    });
   }
 
   navigateToQuestion(): void {

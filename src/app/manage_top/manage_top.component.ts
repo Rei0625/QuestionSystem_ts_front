@@ -40,4 +40,8 @@ export class ManageTopComponent {
   navigateToManageMarks(): void {
     this.router.navigate(['/manage/marks']);
   }
+
+  navigateToTop(): void {
+    this.router.navigate(['/']);
+  }
 }

@@ -263,3 +263,109 @@ td:nth-child(8) {
   transform: translateY(1px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
+
+select {
+  padding: 10px;
+  border: 1px solid #b7d18a;
+  border-radius: 6px;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* セレクトボックスグループ */
+.select-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+/* フィルターボタン */
+.filter-button {
+  background-color: #6c8f00;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.filter-button:hover {
+  background-color: #557700;
+  transform: translateY(-1px);
+}
+.filter-button:active {
+  transform: translateY(1px);
+}
+.reset-button {
+  background-color: #cccccc;
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.reset-button:hover {
+  background-color: #b0b0b0;
+  transform: translateY(-1px);
+}
+.reset-button:active {
+  transform: translateY(1px);
+}
+/* 検索ボックス */
+.search-box {
+  flex-grow: 1;
+}
+.search-box input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #b7d18a;
+  margin-top: 10px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+.search-box input:focus {
+  outline: none;
+  border-color: #6c8f00;
+  box-shadow: 0 0 5px rgba(108, 143, 0, 0.5);
+}
+.search-box input::placeholder {
+  color: #aaa;
+}
+.search-box input:hover {
+  border-color: #8fbf3a;
+}
+.search-box input:active {
+  border-color: #557700;
+}
+/* フィルターボタンとリセットボタンのグループ */
+.filter-reset-group button {
+  height: 42px;
+  white-space: nowrap;
+}
+/* フィルタと検索のコンテナ */
+.filter-search-container {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+.filter-search-container .select-group {
+  flex-grow: 1;
+}
+.filter-search-container .filter-reset-group {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+.filter-search-container .filter-reset-group button {
+  width: 100%;
+}
